@@ -1,1 +1,1 @@
-# life-calender
+# life-calendar
