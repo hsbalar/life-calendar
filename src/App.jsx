@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import times from 'lodash.times'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import Color from './utils/color'
@@ -14,19 +13,27 @@ const Life = styled.div`
 const Week = styled.span`
   width: 16px;
   height: 16px;
+  border-radius: 2px;
   background-color: ${(props) => props.color || '#ebedf0'};
+`
+
+const DateInput = styled.div`
+  border-radius: 4px;
+  background-color: #cee2ff;
+  padding: 8px;
+  position: absolute;
+  right: 2%;
+  top: 2%;
 `
 
 function App() {
   const [userDate, setUserDate] = useState('')
-  const lifeUtilised = getWeeksDifference(new Date('1992-03-14'), new Date())
+  const [colorShades, setColorShades] = useState([])
   const colors = new Color({
     red: 0,
     green: 93,
     blue: 43,
   })
-  const colorShades = colors.getShades(lifeUtilised).reverse()
-
   const onInputChange = (value) => {
     let newValue = value
     if (
@@ -38,23 +45,36 @@ function App() {
     setUserDate(newValue)
   }
 
+  useEffect(() => {
+    const date = new Date(userDate)
+    if (userDate && !isNaN(date.getTime())) {
+      const lifeUtilised = getWeeksDifference(date, new Date())
+      setColorShades(
+        colors.getShades(lifeUtilised > 4160 ? 4160 : lifeUtilised).reverse()
+      )
+    }
+  }, [userDate])
+
   return (
     <>
-      {/* <input
-        type="text"
-        name="date"
-        placeholder="dd/mm/yyyy"
-        value={userDate}
-        onChange={(e) => onInputChange(e.target.value)}
-        maxLength="10"
-      /> */}
+      <DateInput>
+        <label htmlFor="date">Your Birthdate: </label>
+        <input
+          type="date"
+          name="date"
+          placeholder="dd/mm/yyyy"
+          value={userDate}
+          onChange={(e) => onInputChange(e.target.value)}
+          maxLength="10"
+        />
+      </DateInput>
       <Life>
-        {times(4160, (week) => (
+        {Array.from(Array(4160).keys()).map((week) => (
           <Week
-            key={`${week}`}
+            key={`week_${week}`}
             title={week}
             delay={week}
-            color={colorShades[week]}
+            color={colorShades[week] || null}
           ></Week>
         ))}
       </Life>
