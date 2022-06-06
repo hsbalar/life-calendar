@@ -107,7 +107,7 @@ function App() {
         {Array.from(Array(4160).keys()).map((week) => (
           <Week
             key={`week_${week}`}
-            title={week}
+            title={'Week #' + week}
             delay={week}
             color={colorShades[week] || null}
           ></Week>
