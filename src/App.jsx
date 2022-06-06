@@ -4,10 +4,21 @@ import styled from 'styled-components'
 import Color from './utils/color'
 import getWeeksDifference from './utils/getWeeksDifference'
 
+const Title = styled.div`
+  font-weight: bold;
+`
+
+const SubTitle = styled.span`
+  font-weight: normal;
+  font-size: 13px;
+`
+
 const Life = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  align-items: center;
+  justify-content: center;
 `
 
 const Week = styled.span`
@@ -17,14 +28,30 @@ const Week = styled.span`
   background-color: ${(props) => props.color || '#ebedf0'};
 `
 
-const DateInput = styled.div`
+const DateContainer = styled.div`
   border-radius: 4px;
-  background-color: #cee2ff;
+  background: linear-gradient(45deg, pink 30%, #ff79ff 70%);
   padding: 8px;
-  position: absolute;
   right: 2%;
   top: 2%;
-`
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 1px 1px 4px 1px #00000036;
+`;
+
+const DateInput = styled.input`
+  border-radius: 10px;font-size: 12px;border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 3px 7px;
+`;
+
+const DateLabel = styled.span`
+  font-size: 12px;
+`;
 
 function App() {
   const [userDate, setUserDate] = useState('')
@@ -57,17 +84,24 @@ function App() {
 
   return (
     <>
-      <DateInput>
-        <label htmlFor="date">Your Birthdate: </label>
-        <input
-          type="date"
-          name="date"
-          placeholder="dd/mm/yyyy"
-          value={userDate}
-          onChange={(e) => onInputChange(e.target.value)}
-          maxLength="10"
-        />
-      </DateInput>
+      <DateContainer>
+          <Title>
+            Life Calendar — <SubTitle>Your life in weeks</SubTitle>
+          </Title>
+          <div>
+            <DateLabel>
+              <label htmlFor="date">Your Birthdate </label>
+            </DateLabel>           
+            <DateInput
+              type="date"
+              name="date"
+              placeholder="dd/mm/yyyy"
+              value={userDate}
+              onChange={(e) => onInputChange(e.target.value)}
+              maxLength="10"
+            />
+          </div>
+      </DateContainer>
       <Life>
         {Array.from(Array(4160).keys()).map((week) => (
           <Week
