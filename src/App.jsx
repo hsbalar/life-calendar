@@ -6,12 +6,12 @@ import getWeeksDifference from './utils/getWeeksDifference'
 
 const Title = styled.div`
   font-weight: bold;
-`
+`;
 
 const SubTitle = styled.span`
   font-weight: normal;
   font-size: 13px;
-`
+`;
 
 const Life = styled.div`
   display: flex;
@@ -19,14 +19,14 @@ const Life = styled.div`
   gap: 6px;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Week = styled.span`
   width: 16px;
   height: 16px;
   border-radius: 2px;
   background-color: ${(props) => props.color || '#ebedf0'};
-`
+`;
 
 const DateContainer = styled.div`
   border-radius: 4px;
@@ -44,7 +44,8 @@ const DateContainer = styled.div`
 `;
 
 const DateInput = styled.input`
-  border-radius: 10px;font-size: 12px;border-radius: 5px;
+  font-size: 12px;
+  border-radius: 5px;
   border: 1px solid #ccc;
   padding: 3px 7px;
 `;
