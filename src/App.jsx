@@ -55,7 +55,8 @@ const DateLabel = styled.span`
 `;
 
 function App() {
-  const [userDate, setUserDate] = useState('')
+  const currentDate = localStorage.getItem('currentDate') || ''
+  const [userDate, setUserDate] = useState(currentDate)
   const [colorShades, setColorShades] = useState([])
   const colors = new Color({
     red: 0,
@@ -70,6 +71,8 @@ function App() {
     ) {
       newValue = value + '/'
     }
+
+    localStorage.setItem('currentDate', newValue)
     setUserDate(newValue)
   }
 
