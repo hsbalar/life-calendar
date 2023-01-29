@@ -91,6 +91,7 @@ function App() {
       <DateContainer>
           <Title>
             Life Calendar — <SubTitle>Your life in weeks</SubTitle>
+            <SubTitle>&nbsp;(<a href="https://github.com/hsbalar/life-calendar" target="_blank">Source Code</a>)</SubTitle>
           </Title>
           <div>
             <DateLabel>
