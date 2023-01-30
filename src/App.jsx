@@ -55,7 +55,8 @@ const DateLabel = styled.span`
 `;
 
 function App() {
-  const [userDate, setUserDate] = useState('')
+  const currentDate = localStorage.getItem('currentDate') || ''
+  const [userDate, setUserDate] = useState(currentDate)
   const [colorShades, setColorShades] = useState([])
   const colors = new Color({
     red: 0,
@@ -70,6 +71,8 @@ function App() {
     ) {
       newValue = value + '/'
     }
+
+    localStorage.setItem('currentDate', newValue)
     setUserDate(newValue)
   }
 
@@ -88,6 +91,7 @@ function App() {
       <DateContainer>
           <Title>
             Life Calendar — <SubTitle>Your life in weeks</SubTitle>
+            <SubTitle>&nbsp;(<a href="https://github.com/hsbalar/life-calendar" target="_blank">Source Code</a>)</SubTitle>
           </Title>
           <div>
             <DateLabel>
